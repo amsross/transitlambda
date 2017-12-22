@@ -1,0 +1,28 @@
+{
+  "statusCode": 404,
+  "headers": {
+    "cache-control": "no-cache",
+    "content-type": "application/json; charset=utf-8",
+    "date": "Fri, 22 Dec 2017 22:35:49 GMT",
+    "server": "nginx/1.4.6 (Ubuntu)",
+    "vary": "Origin",
+    "x-apiaxleproxy-qpd-left": "11967",
+    "x-apiaxleproxy-qpm-left": "114",
+    "x-apiaxleproxy-qps-left": "6",
+    "x-content-type-options": "nosniff",
+    "x-frame-options": "SAMEORIGIN",
+    "x-request-id": "d9eb4560-d967-4aab-81ea-d12caaa2b2f7",
+    "x-runtime": "0.004101",
+    "x-xss-protection": "1; mode=block",
+    "content-length": "58",
+    "connection": "keep-alive"
+  },
+  "url": "http://transit.land:80/api/v1/invalid-fixture?per_page=1",
+  "time": 72,
+  "request": {
+    "method": "GET",
+    "headers": {
+      "host": "transit.land"
+    }
+  }
+}

@@ -1,0 +1,11 @@
+service: transitlandlambda
+
+provider:
+  name: aws
+  runtime: nodejs6.10
+
+functions:
+  lambda:
+    handler: handler.lambda
+    events:
+      - alexaSkill

@@ -1,0 +1,29 @@
+{
+  "statusCode": 200,
+  "headers": {
+    "cache-control": "max-age=0, private, must-revalidate",
+    "content-type": "application/json; charset=utf-8",
+    "date": "Fri, 22 Dec 2017 22:35:50 GMT",
+    "etag": "W/\"4ce88288a401a2973f6166bfbf8f9b50\"",
+    "server": "nginx/1.4.6 (Ubuntu)",
+    "vary": "Origin",
+    "x-apiaxleproxy-qpd-left": "11965",
+    "x-apiaxleproxy-qpm-left": "112",
+    "x-apiaxleproxy-qps-left": "7",
+    "x-content-type-options": "nosniff",
+    "x-frame-options": "SAMEORIGIN",
+    "x-request-id": "026f5dff-3441-4b57-80f5-0b1a3a3171f4",
+    "x-runtime": "0.088852",
+    "x-xss-protection": "1; mode=block",
+    "content-length": "13275",
+    "connection": "keep-alive"
+  },
+  "url": "https://transit.land:443/api/v1/stops?per_page=50&served_by=o-dr4e-portauthoritytransitcorporation",
+  "time": 224,
+  "request": {
+    "method": "GET",
+    "headers": {
+      "host": "transit.land"
+    }
+  }
+}
