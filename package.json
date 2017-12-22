@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "engines" : {
+    "node" : "6.10"
+  },
   "scripts": {
     "pretest": "standardx",
     "test": " VCR_MODE=playback tape *.spec.js | tap-spec"
