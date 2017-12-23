@@ -155,6 +155,7 @@ test('index', assert => {
         .tap(x => assert.equal(typeof x, 'object', 'result is an object'))
         .tap(x => assert.equal(x.destination_onestop_id, 's-dr4dv05cxp-ashland', 'correct stop'))
         .tap(x => assert.ok(/^00:/.test(x.origin_departure_time), 'tomorrow train'))
+        .tap(x => assert.ok(x.trip, 'has `trip`'))
         .collect()
         .tap(xs => assert.equal(xs.length, 2, 'returns a single result'))
         .tap(() => clock.restore())
@@ -174,13 +175,15 @@ test('index', assert => {
       findScheduleStopPairsForStops({
         timezone: 'America/New_York',
         onestop_id: 'o-dr4e-portauthoritytransitcorporation',
-        origin_onestop_id: 's-dr4durps7v-haddonfield'
+        origin_onestop_id: 's-dr4durps7v-haddonfield',
+        destination_onestop_id: 's-dr4dv05cxp-ashland'
       })
         .take(1)
         .tap(x => assert.equal(typeof x, 'object', 'result is an object'))
         .tap(x => assert.ok(x.trip_headsign, 'has `headsign`'))
         .tap(x => assert.ok(x.origin_departure_time, 'has `origin_departure_time`'))
         .tap(x => assert.ok(x.destination_arrival_time, 'has `destination_arrival_time`'))
+        .tap(x => assert.equal(x.trip_headsign, 'Lindenwold', 'correct trip directions'))
         .collect()
         .tap(xs => assert.equal(xs.length, 1, 'returns a single result'))
         .tap(() => clock.restore())
@@ -194,6 +197,7 @@ test('index', assert => {
       findScheduleStopPairsForStops({
         timezone: 'America/New_York',
         onestop_id: 'o-dr4e-portauthoritytransitcorporation',
+        origin_onestop_id: 's-dr4durps7v-haddonfield',
         destination_onestop_id: 's-dr4dv05cxp-ashland'
       })
         .take(1)
@@ -201,6 +205,7 @@ test('index', assert => {
         .tap(x => assert.ok(x.trip_headsign, 'has `headsign`'))
         .tap(x => assert.ok(x.origin_departure_time, 'has `origin_departure_time`'))
         .tap(x => assert.ok(x.destination_arrival_time, 'has `destination_arrival_time`'))
+        .tap(x => assert.equal(x.trip_headsign, 'Lindenwold', 'correct trip directions'))
         .collect()
         .tap(xs => assert.equal(xs.length, 1, 'returns a single object'))
         .tap(() => clock.restore())

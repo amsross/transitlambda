@@ -114,7 +114,7 @@ module.exports.findStopsForOperator = findStopsForOperator
 module.exports.findScheduleStopPairs = findScheduleStopPairs
 module.exports.findScheduleStopPairsForStops = findScheduleStopPairsForStops
 module.exports.lib = (on, from, to) => findOperators({ term: on })
-  .flatMap(findStopsForOperator)
+  .flatMap(findStopsForOperator(from, to))
   .flatMap(findScheduleStopPairsForStops)
   .batchWithTimeOrCount(3000, 5)
   .take(1)
