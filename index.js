@@ -50,6 +50,7 @@ const findOperators = ({ term }) => h.of(cache()('operators', term))
   .compact()
   .otherwise(() => findThings('operators')({
   }).flatMap(fuseConfigs['operators'](term)))
+  .take(1)
 
 const findStops = ({ term, onestop_id }) => h.of(cache()('stops', term))
   .compact()
