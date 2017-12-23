@@ -2,6 +2,23 @@ const test = require('tape')
 const h = require('highland')
 
 test('helpers', assert => {
+  test('assign', assert => {
+    const { assign } = require('./helpers')
+
+    assert.deepEqual(assign({ foo: 'bar' }, { bar: 'foo' }), { foo: 'bar', bar: 'foo' })
+    assert.deepEqual(assign({ foo: 'bar' }, { foo: 'baz' }), { foo: 'baz' })
+
+    assert.end()
+  })
+
+  test('concat', assert => {
+    const { concat } = require('./helpers')
+
+    assert.deepEqual(concat([1, 2])([3, 4]), [1, 2, 3, 4])
+
+    assert.end()
+  })
+
   test('ap', assert => {
     const { ap } = require('./helpers')
 

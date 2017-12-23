@@ -4,12 +4,15 @@ const F = require('fuse.js')
 const h = require('highland')
 const q = require('request')
 
+const assign = (...args) => Object.assign({}, ...args)
+const concat = x => y => [].concat(x).concat(y)
+
 const ap = xs => fns => xs
   .map(x => fns.fork().map(fn => fn(x)))
   .merge()
 
 const makeURI = type => params =>
-  h.of(`https://transit.land/api/v1/${type}?${querystring.stringify(Object.assign({
+  h.of(`https://transit.land/api/v1/${type}?${querystring.stringify(assign({
     offset: 0,
     per_page: 50,
     sort_key: 'id',
@@ -71,6 +74,8 @@ const fuseConfigs = {
 
 module.exports = {
   ap,
+  assign,
+  concat,
   getJSON,
   limiter,
   makeURI,
