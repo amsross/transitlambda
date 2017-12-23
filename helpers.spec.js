@@ -14,7 +14,7 @@ test('helpers', assert => {
   test('concat', assert => {
     const { concat } = require('./helpers')
 
-    assert.deepEqual(concat([1, 2])([3, 4]), [1, 2, 3, 4])
+    assert.deepEqual(concat([1, 2], [3, 4]), [1, 2, 3, 4])
 
     assert.end()
   })

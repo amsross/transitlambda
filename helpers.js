@@ -5,7 +5,7 @@ const h = require('highland')
 const q = require('request')
 
 const assign = (...args) => Object.assign({}, ...args)
-const concat = x => y => [].concat(x).concat(y)
+const concat = (x, y) => [].concat(x).concat(y)
 
 const ap = xs => fns => xs
   .map(x => fns.fork().map(fn => fn(x)))
