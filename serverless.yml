@@ -1,4 +1,4 @@
-service: transitlandlambda
+service: transitlambda
 
 provider:
   name: aws
