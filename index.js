@@ -1,6 +1,7 @@
 console.time('lambda')
 const h = require('highland')
-const { local } = require('luxon').DateTime
+const { DateTime } = require('luxon')
+const { local } = DateTime
 const { ap, assign, concat, getJSON, limiter, makeURI, pairWithDestination, fuseConfigs } = require('./helpers')
 
 const cache = () => {
@@ -71,8 +72,10 @@ const findStopsForOperator = (from, to) => operator => h([
     destination_onestop_id: destination.onestop_id
   }))
 
-const findScheduleStopPairs = ({ onestop_id, timezone, origin_onestop_id, destination_onestop_id, trip }) => {
-  const now = local().setZone(timezone)
+const findScheduleStopPairs = ({ onestop_id, timezone, origin_onestop_id, destination_onestop_id, origin_departure_time, trip }) => {
+  const now = origin_departure_time
+    ? DateTime.fromISO(origin_departure_time)
+    : local().setZone(timezone)
 
   return h([
     findThings('schedule_stop_pairs')({
@@ -80,7 +83,9 @@ const findScheduleStopPairs = ({ onestop_id, timezone, origin_onestop_id, destin
       destination_onestop_id,
       sort_key: 'origin_departure_time',
       date: now.toFormat('yyyy-LL-dd'),
-      origin_departure_between: `${now.toFormat('T')},${now.plus({hours: 1}).toFormat('T')}`,
+      origin_departure_between: origin_departure_time
+        ? `${now.toFormat('T')},24:00`
+        : `${now.toFormat('T')},24:00`,
       operator_onestop_id: onestop_id,
       trip
     }).sequence(),
@@ -96,8 +101,8 @@ const findScheduleStopPairs = ({ onestop_id, timezone, origin_onestop_id, destin
   ]).sequence()
 }
 
-const findScheduleStopPairsForStops = params => findScheduleStopPairs(params)
-  .flatMap(origin => findScheduleStopPairs(assign({ trip: origin.trip }, params))
+const findScheduleStopPairsForStops = params => findScheduleStopPairs(assign(params, { destination_onestop_id: undefined }))
+  .flatMap(origin => findScheduleStopPairs(assign(params, { trip: origin.trip, origin_departure_time: origin.origin_departure_time, origin_onestop_id: undefined }))
     .take(1)
     .through(pairWithDestination(origin)))
 
