@@ -1,0 +1,29 @@
+{
+  "statusCode": 200,
+  "headers": {
+    "cache-control": "max-age=0, private, must-revalidate",
+    "content-type": "application/json; charset=utf-8",
+    "date": "Sat, 23 Dec 2017 07:26:27 GMT",
+    "etag": "W/\"1bced02418415fe68afdbe20da1c86ef\"",
+    "server": "nginx/1.4.6 (Ubuntu)",
+    "vary": "Origin",
+    "x-apiaxleproxy-qpd-left": "11684",
+    "x-apiaxleproxy-qpm-left": "109",
+    "x-apiaxleproxy-qps-left": "4",
+    "x-content-type-options": "nosniff",
+    "x-frame-options": "SAMEORIGIN",
+    "x-request-id": "0d0cd10f-6106-4339-8021-ad27fe57e692",
+    "x-runtime": "0.016622",
+    "x-xss-protection": "1; mode=block",
+    "content-length": "114",
+    "connection": "keep-alive"
+  },
+  "url": "http://transit.land:443/api/v1/schedule_stop_pairs?offset=0&per_page=50&sort_key=origin_departure_time&sort_order=asc&origin_onestop_id=&destination_onestop_id=s-dr4dv05cxp-ashland&date=2017-09-27&origin_departure_between=00%3A00%2C02%3A00&operator_onestop_id=o-dr4e-portauthoritytransitcorporation&trip=4409",
+  "time": 0,
+  "request": {
+    "method": "GET",
+    "headers": {
+      "host": "transit.land"
+    }
+  }
+}

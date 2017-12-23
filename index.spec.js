@@ -4,13 +4,28 @@ const { useFakeTimers } = require('sinon')
 
 test('index', assert => {
   test('lib', assert => {
+    const clock = useFakeTimers(1506438000000)
     const { lib } = require('./index')
 
     assert.equal(typeof lib, 'function', 'returns a function')
     assert.equal(lib.length, 3, 'expects 3 arguments')
 
     assert.ok(h.isStream(lib()), 'execution returns a stream')
-    assert.end()
+
+    lib('patco', 'haddonfield', 'ashland')
+      .tap(x => assert.equal(x.trip_headsign, 'Lindenwold', 'correct trip directions'))
+      .collect()
+      .tap(xs => assert.ok(xs.length, 'some results'))
+      .tap(xs => assert.deepEqual(xs, [
+        { trip_headsign: 'Lindenwold', origin_departure_time: '11:05:00', destination_arrival_time: '11:10:00' },
+        { trip_headsign: 'Lindenwold', origin_departure_time: '11:17:00', destination_arrival_time: '11:22:00' },
+        { trip_headsign: 'Lindenwold', origin_departure_time: '11:29:00', destination_arrival_time: '11:34:00' },
+        { trip_headsign: 'Lindenwold', origin_departure_time: '11:41:00', destination_arrival_time: '11:46:00' },
+        { trip_headsign: 'Lindenwold', origin_departure_time: '11:53:00', destination_arrival_time: '11:58:00' }
+      ]))
+      .tap(() => clock.restore())
+      .errors(err => assert.ifError(err))
+      .done(assert.end)
   })
 
   test('getThings', assert => {
@@ -89,7 +104,7 @@ test('index', assert => {
     const { findScheduleStopPairs } = require('./index')
 
     test('findScheduleStopPairs origin', assert => {
-      const clock = useFakeTimers(1506439800000)
+      const clock = useFakeTimers(1506438000000)
 
       findScheduleStopPairs({
         timezone: 'America/New_York',
@@ -126,7 +141,7 @@ test('index', assert => {
     })
 
     test('findScheduleStopPairs origin', assert => {
-      const clock = useFakeTimers(1506439800000)
+      const clock = useFakeTimers(1506438000000)
 
       findScheduleStopPairs({
         timezone: 'America/New_York',
@@ -170,7 +185,7 @@ test('index', assert => {
     const { findScheduleStopPairsForStops } = require('./index')
 
     test('findScheduleStopPairsForStops origin', assert => {
-      const clock = useFakeTimers(1506439800000)
+      const clock = useFakeTimers(1506438000000)
 
       findScheduleStopPairsForStops({
         timezone: 'America/New_York',
@@ -192,7 +207,7 @@ test('index', assert => {
     })
 
     test('findScheduleStopPairsForStops destination', assert => {
-      const clock = useFakeTimers(1506439800000)
+      const clock = useFakeTimers(1506438000000)
 
       findScheduleStopPairsForStops({
         timezone: 'America/New_York',
